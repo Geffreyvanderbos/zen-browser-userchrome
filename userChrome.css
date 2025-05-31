@@ -2,7 +2,7 @@
     --attention-dot-color: rgba(0, 0, 0, 0) !important;
     --zen-element-separation: 14px !important;
     --zen-border-radius: 10px !important;
-    --tab-min-height: 40px !important;
+    --tab-min-height: 44px !important;
     --zen-toolbar-height: 48px !important;
 }
 
@@ -15,15 +15,41 @@
     clip-path: inset(0 round var(--zen-border-radius));
 }
 
-/* Hide elements */
-/* #zen-current-workspace-indicator-container, */
-.zen-current-workspace-indicator-icon,
+#zen-current-workspace-indicator-container,
 #userContext-icons,
 #PersonalToolbar {
-    /*   display: none; */
+    display: none;
+}
+
+.zen-essentials-container {
+    &[data-hack-type="1"] {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(max(22%, 48px), auto)
+        ) !important;
+    }
+}
+
+#navigator-toolbox[zen-sidebar-expanded="true"] {
+    & #zen-essentials {
+        --tab-min-height: 56px !important;
+    }
+}
+
+.zen-current-workspace-indicator-icon {
+    color: transparent !important;
+    text-shadow: 0 0 0 var(--sidebar-text-color);
+    opacity: 0.7;
+}
+
+.zen-current-workspace-indicator-icon {
     transform: scale(0.8);
-    filter: brightness(0) opacity(0.4) !important;
-    mix-blend-mode: multiply;
+}
+
+.zen-current-workspace-indicator {
+    gap: 8px !important;
+    margin-top: 4px;
+    margin-bottom: -4px !important;
 }
 
 /* URL bar */
@@ -123,6 +149,67 @@ panel[type="arrow"][animate="open"] {
 
 #reload-button {
     list-style-image: url("chrome://global/skin/icons/reload.svg") !important;
+}
+
+zen-workspace-icons toolbarbutton:not([active="true"]) .zen-workspace-icon {
+    font-size: 0 !important;
+    position: relative;
+    transition: font-size 0.2s ease;
+}
+
+zen-workspace-icons
+    toolbarbutton:not([active="true"])
+    .zen-workspace-icon::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--sidebar-text-color);
+    opacity: 0.4;
+    transition: opacity 0.164s ease-in;
+}
+
+zen-workspace-icons
+    toolbarbutton:not([active="true"]):hover
+    .zen-workspace-icon {
+    font-size: inherit !important;
+    color: inherit !important; /* Reset color */
+    text-shadow: none !important; /* Remove silhouette */
+    opacity: 1 !important; /* Reset opacity */
+}
+
+zen-workspace-icons
+    toolbarbutton:not([active="true"]):hover
+    .zen-workspace-icon::before {
+    opacity: 0;
+}
+
+/* Active workspace silhouette - only when NOT hovering */
+zen-workspace-icons
+    toolbarbutton[active="true"]:not(:hover)
+    .zen-workspace-icon {
+    color: transparent !important;
+    text-shadow: 0 0 0 var(--sidebar-text-color);
+    opacity: 0.6;
+    transition:
+        color 0.164s ease-in,
+        text-shadow 0.164s ease-in,
+        opacity 0.164s ease-in;
+}
+
+/* Active workspace on hover - show full emoji */
+zen-workspace-icons toolbarbutton[active="true"]:hover .zen-workspace-icon {
+    color: inherit !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    transition:
+        color 0.164s ease-out,
+        text-shadow 0.164s ease-out,
+        opacity 0.164s ease-out;
 }
 
 /* Unloaded Tab Icon Styling
