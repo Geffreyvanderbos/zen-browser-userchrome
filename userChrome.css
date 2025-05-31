@@ -1,0 +1,175 @@
+:root {
+    --attention-dot-color: rgba(0, 0, 0, 0) !important;
+    --zen-element-separation: 14px !important;
+    --zen-border-radius: 10px !important;
+    --tab-min-height: 40px !important;
+    --zen-toolbar-height: 48px !important;
+}
+
+#zen-main-app-wrapper {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.browserContainer {
+    clip-path: inset(0 round var(--zen-border-radius));
+}
+
+/* Hide elements */
+/* #zen-current-workspace-indicator-container, */
+.zen-current-workspace-indicator-icon,
+#userContext-icons,
+#PersonalToolbar {
+    /*   display: none; */
+    transform: scale(0.8);
+    filter: brightness(0) opacity(0.4) !important;
+    mix-blend-mode: multiply;
+}
+
+/* URL bar */
+.urlbar-input-box {
+    padding-left: 8px;
+}
+
+#urlbar {
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Tab Text Styling */
+.tab-text.tab-label,
+.tab-editor-container,
+.toolbarbutton-text {
+    font-size: 14px !important;
+    color: var(--tab-selected-textcolor) !important;
+    letter-spacing: 0px;
+    font-weight: 500;
+}
+
+.tab-label-container:not([selected], [multiselected]) {
+    opacity: 1;
+}
+
+/* Workspaces Button Adjustments */
+#navigator-toolbox[zen-sidebar-expanded="true"] #zen-workspaces-button {
+    margin-inline: 8px;
+}
+
+#zen-workspaces-button:not([as-button="true"]) toolbarbutton {
+    margin: auto;
+    width: auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px !important;
+    position: relative;
+}
+
+#tabbrowser-tabs {
+    & .tabbrowser-tab {
+        @media -moz-pref("zen.tabs.dim-pending") {
+            &[pending="true"] .tab-icon-image {
+                opacity: 1 !important;
+            }
+        }
+    }
+}
+
+#zen-essentials-container {
+    margin-bottom: 8px;
+}
+
+.tab-close-button {
+    opacity: 0;
+    transition: opacity 0.164s ease !important;
+}
+
+.tab-content:hover .tab-close-button {
+    opacity: 1;
+}
+
+.tab-label-container:not([selected], [multiselected]) {
+    opacity: 1;
+}
+
+/* Disable all panel animations */
+panel[type="arrow"][animate="open"] {
+    animation: none !important;
+}
+
+@media (-moz-panel-animations) {
+    .animatable-menupopup,
+    panel[type="arrow"] {
+        &:is([animate="false"], [animate="open"]) {
+            opacity: 1 !important;
+            transform: none !important;
+            -moz-window-opacity: 1 !important;
+            -moz-window-transform: none !important;
+            transition: none !important;
+        }
+
+        &:not([animate="false"]) {
+            transition-duration: 0s !important;
+        }
+    }
+}
+
+#back-button {
+    list-style-image: url("chrome://browser/skin/back.svg") !important;
+}
+
+#forward-button {
+    list-style-image: url("chrome://browser/skin/forward.svg") !important;
+}
+
+#reload-button {
+    list-style-image: url("chrome://global/skin/icons/reload.svg") !important;
+}
+
+/* Unloaded Tab Icon Styling
+.tabbrowser-tab[pending="true"] .tab-icon-stack {
+  filter: grayscale(1);
+  position: relative;
+}
+
+ .tabbrowser-tab[pending="true"] .tab-text.tab-label:before, .tabbrowser-tab[pending="true"] .toolbarbutton-text:before {
+  content: "z";
+  position: relative;
+  top: -1px;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 8px;
+  font-weight: bold;
+  border-radius: 50%;
+  line-height: 12px;
+  opacity: .5;
+} */
+
+/* .tabbrowser-tab[pending="true"] .tab-icon-stack::after {
+  content: "z";
+  position: absolute;
+  background-color: var(--lwt-accent-color);
+  background-image: linear-gradient(var(--audio-overlay-extra-background)), linear-gradient(var(--toolbox-bgcolor));
+  -moz-context-properties: fill;
+  fill: var(--tab-selected-textcolor) !important;
+  color-scheme: var(--tab-selected-color-scheme);
+  border-radius: var(--border-radius-circle);
+  padding: 2px;
+  top: -7px;
+  inset-inline-end: -7px;
+  z-index: 1;
+  font-size: 8px;
+  font-weight: bold;
+  color: #666;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1;
+} */
