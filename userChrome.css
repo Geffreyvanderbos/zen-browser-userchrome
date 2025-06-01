@@ -4,6 +4,8 @@
     --zen-border-radius: 10px !important;
     --tab-min-height: 44px !important;
     --zen-toolbar-height: 48px !important;
+    --geffreys-zen-tabbar-easing-in: cubic-bezier(0.22, 1, 0.36, 1);
+    --geffreys-zen-tabbar-easing-out: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #zen-main-app-wrapper {
@@ -210,6 +212,23 @@ zen-workspace-icons toolbarbutton[active="true"]:hover .zen-workspace-icon {
         color 0.164s ease-out,
         text-shadow 0.164s ease-out,
         opacity 0.164s ease-out;
+}
+
+:root[zen-compact-mode="true"]:not([customizing]):not(
+        [inDOMFullscreen="true"]
+    ) {
+    @media -moz-pref("zen.view.compact.hide-tabbar") or -moz-pref("zen.view.use-single-toolbar") {
+        &:not([zen-compact-animating]) {
+            & #navigator-toolbox {
+                &:not([animate="true"]) {
+                    transition:
+                        left 0.25s var(--geffreys-zen-tabbar-easing-in),
+                        right 0.05s var(--geffreys-zen-tabbar-easing-out),
+                        visibility 0.25s ease !important;
+                }
+            }
+        }
+    }
 }
 
 /* Unloaded Tab Icon Styling
